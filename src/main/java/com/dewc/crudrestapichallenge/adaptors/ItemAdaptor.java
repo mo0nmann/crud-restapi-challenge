@@ -10,11 +10,18 @@ public class ItemAdaptor {
         Item item = new Item();
 
         item.setName(itemDto.getName());
-        item.setDescription(itemDto.getDescription())
+        item.setDescription(itemDto.getDescription());
         
         return item;
-
-
     }
 
+    public static ItemDto toDto(Item item) {
+
+        ItemDto itemDto = new ItemDto();
+
+        itemDto.setName(item.getName());
+        itemDto.setDescription(item.getDescription());
+
+        return itemDto;
+    }
 }
