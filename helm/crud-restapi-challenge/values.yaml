@@ -6,3 +6,5 @@ image:
 service:
   type: ClusterIP
   port: 80
+ingress:
+  host: crud-restapi-challenge.com
