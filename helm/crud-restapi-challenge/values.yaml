@@ -1,0 +1,8 @@
+replicaCount: 1
+image:
+  repository: crud-restapi-challenge
+  tag: "latest"
+  pullPolicy: Never
+service:
+  type: ClusterIP
+  port: 80
