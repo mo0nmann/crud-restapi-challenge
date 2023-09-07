@@ -1,6 +1,8 @@
 package com.dewc.crudrestapichallenge.services;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -30,6 +32,15 @@ public class ItemService implements IItemService {
     public Optional<ItemDto> getItem(Long id) {
         Optional<Item> item = itemRepository.findById(id);
         return item.isPresent() ? Optional.of(ItemAdaptor.toDto(item.get())) : Optional.empty();
+    }
+
+    @Override
+    public List<ItemDto> getItems() {
+        List<Item> items = itemRepository.findAll();
+        List<ItemDto> itemDtos = items.stream()
+                                    .map(ItemAdaptor::toDto)
+                                    .collect(Collectors.toList());
+        return itemDtos;
     }
 
     @Override

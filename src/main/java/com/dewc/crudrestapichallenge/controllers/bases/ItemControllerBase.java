@@ -1,6 +1,7 @@
 package com.dewc.crudrestapichallenge.controllers.bases;
 
 import java.util.Optional;
+import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -26,6 +27,13 @@ public abstract class ItemControllerBase {
         itemService.saveItem(itemDto);
         return ResponseEntity.ok().build();
     }
+
+    @GetMapping("/items")
+    public ResponseEntity<List<ItemDto>> getItems() {
+        List<ItemDto> items = itemService.getItems();
+        return ResponseEntity.ok(items);
+    } 
+    
 
     @GetMapping("/items/{id}")
     public ResponseEntity<ItemDto> getItem(@PathVariable Long id) {
