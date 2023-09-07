@@ -9,9 +9,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.dewc.crudrestapichallenge.adaptors.ItemAdaptor;
+import com.dewc.crudrestapichallenge.dao.ItemDao;
 import com.dewc.crudrestapichallenge.dto.ItemDto;
 import com.dewc.crudrestapichallenge.entities.Item;
-import com.dewc.crudrestapichallenge.repositories.ItemRepository;
 import com.dewc.crudrestapichallenge.services.interfaces.IItemService;
 
 @Service
@@ -19,24 +19,23 @@ import com.dewc.crudrestapichallenge.services.interfaces.IItemService;
 public class ItemService implements IItemService {
 
     @Autowired
-    private ItemRepository itemRepository;
-
+    private ItemDao itemDao;
 
     @Override
     public void saveItem(ItemDto itemDto) {
         Item item = ItemAdaptor.toEntity(itemDto);
-        itemRepository.save(item);
+        itemDao.save(item);
     }
 
     @Override
     public Optional<ItemDto> getItem(Long id) {
-        Optional<Item> item = itemRepository.findById(id);
+        Optional<Item> item = itemDao.findById(id);
         return item.isPresent() ? Optional.of(ItemAdaptor.toDto(item.get())) : Optional.empty();
     }
 
     @Override
     public List<ItemDto> getItems() {
-        List<Item> items = itemRepository.findAll();
+        List<Item> items = itemDao.findAll();
         List<ItemDto> itemDtos = items.stream()
                                     .map(ItemAdaptor::toDto)
                                     .collect(Collectors.toList());
@@ -45,20 +44,17 @@ public class ItemService implements IItemService {
 
     @Override
     public void updateItem(Long id, String name, String description) {
-
-        Optional<Item> optionalItem = itemRepository.findById(id);
-
+        Optional<Item> optionalItem = itemDao.findById(id);
         if(optionalItem.isPresent()){
             Item item = optionalItem.get();
             item.setName(name);
             item.setDescription(description);
-            itemRepository.save(item);
+            itemDao.save(item);
         }
-
     }
 
     @Override
     public void deleteItem(Long id) {
-        itemRepository.deleteById(id);
+        itemDao.deleteById(id);
     }
 }
