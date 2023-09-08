@@ -2,6 +2,7 @@ package com.dewc.crudrestapichallenge.services;
 
 import com.dewc.crudrestapichallenge.adaptors.ItemAdaptor;
 import com.dewc.crudrestapichallenge.dao.MockItemDao;
+import com.dewc.crudrestapichallenge.dto.InputtedItemDto;
 import com.dewc.crudrestapichallenge.dto.ItemDto;
 import com.dewc.crudrestapichallenge.entities.Item;
 import com.dewc.crudrestapichallenge.services.interfaces.IItemService;
@@ -10,20 +11,28 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Primary;
+import org.springframework.stereotype.Service;
 
+@Service
+// @Primary
+@Qualifier("itemService")
 public class MockItemService implements IItemService {
     
     private final MockItemDao mockItemDao;
 
+    @Autowired
     public MockItemService(@Qualifier("mockItemDao") MockItemDao mockItemDao) {
         this.mockItemDao = mockItemDao;
     }
 
     @Override
-    public void saveItem(ItemDto itemDto) {
+    public ItemDto saveItem(InputtedItemDto itemDto) {
         Item item = ItemAdaptor.toEntity(itemDto);
         mockItemDao.save(item);
+        return ItemAdaptor.toDto(item);
     }
 
     @Override

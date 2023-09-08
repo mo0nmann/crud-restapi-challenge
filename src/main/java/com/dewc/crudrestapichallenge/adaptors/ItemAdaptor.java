@@ -1,11 +1,12 @@
 package com.dewc.crudrestapichallenge.adaptors;
 
+import com.dewc.crudrestapichallenge.dto.InputtedItemDto;
 import com.dewc.crudrestapichallenge.dto.ItemDto;
 import com.dewc.crudrestapichallenge.entities.Item;
 
 public class ItemAdaptor {
     
-    public static Item toEntity(ItemDto itemDto) {
+    public static Item toEntity(InputtedItemDto itemDto) {
 
         Item item = new Item();
 
@@ -19,6 +20,7 @@ public class ItemAdaptor {
 
         ItemDto itemDto = new ItemDto();
 
+        itemDto.setId(item.getId());
         itemDto.setName(item.getName());
         itemDto.setDescription(item.getDescription());
 

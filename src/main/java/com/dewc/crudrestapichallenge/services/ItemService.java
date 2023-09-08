@@ -6,25 +6,33 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import com.dewc.crudrestapichallenge.adaptors.ItemAdaptor;
-import com.dewc.crudrestapichallenge.dao.ItemDao;
+import com.dewc.crudrestapichallenge.dao.interfaces.IItemDao;
+import com.dewc.crudrestapichallenge.dto.InputtedItemDto;
 import com.dewc.crudrestapichallenge.dto.ItemDto;
 import com.dewc.crudrestapichallenge.entities.Item;
 import com.dewc.crudrestapichallenge.services.interfaces.IItemService;
 
 @Service
+@Primary
 @Qualifier("itemService")
 public class ItemService implements IItemService {
 
+    private final IItemDao itemDao;
+
     @Autowired
-    private ItemDao itemDao;
+    public ItemService(@Qualifier("itemDao") IItemDao itemDao) {
+        this.itemDao = itemDao;
+    }
 
     @Override
-    public void saveItem(ItemDto itemDto) {
+    public ItemDto saveItem(InputtedItemDto itemDto) {
         Item item = ItemAdaptor.toEntity(itemDto);
         itemDao.save(item);
+        return ItemAdaptor.toDto(item);
     }
 
     @Override

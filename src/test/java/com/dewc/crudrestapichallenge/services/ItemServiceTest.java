@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.dewc.crudrestapichallenge.dao.MockItemDao;
-import com.dewc.crudrestapichallenge.dto.ItemDto;
+import com.dewc.crudrestapichallenge.dto.InputtedItemDto;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,7 +20,7 @@ public class ItemServiceTest {
 
     @Test
     public void testSaveItem() {
-        ItemDto itemDto = new ItemDto();
+        InputtedItemDto itemDto = new InputtedItemDto();
         itemDto.setName("TestItem");
         itemDto.setDescription("TestDescription");
         
@@ -31,7 +31,7 @@ public class ItemServiceTest {
 
     @Test
     public void testGetItem() {
-        ItemDto itemDto = new ItemDto();
+        InputtedItemDto itemDto = new InputtedItemDto();
         itemDto.setName("TestItem");
         itemDto.setDescription("TestDescription");
         

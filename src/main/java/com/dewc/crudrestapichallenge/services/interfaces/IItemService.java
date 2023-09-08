@@ -3,11 +3,12 @@ package com.dewc.crudrestapichallenge.services.interfaces;
 import java.util.Optional;
 import java.util.List;
 
+import com.dewc.crudrestapichallenge.dto.InputtedItemDto;
 import com.dewc.crudrestapichallenge.dto.ItemDto;
 
 public interface IItemService {
     
-    public void saveItem(ItemDto itemDto);
+    public ItemDto saveItem(InputtedItemDto itemDto);
 
     List<ItemDto> getItems();
 

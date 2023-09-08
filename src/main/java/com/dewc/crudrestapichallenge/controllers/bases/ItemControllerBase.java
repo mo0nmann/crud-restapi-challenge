@@ -3,6 +3,7 @@ package com.dewc.crudrestapichallenge.controllers.bases;
 import java.util.Optional;
 import java.util.List;
 
+import org.glassfish.jaxb.core.v2.TODO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,8 +12,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import com.dewc.crudrestapichallenge.dto.InputtedItemDto;
 import com.dewc.crudrestapichallenge.dto.ItemDto;
 import com.dewc.crudrestapichallenge.services.interfaces.IItemService;
+
+// TODO: Return the DTOs instead
 
 public abstract class ItemControllerBase {
     
@@ -23,9 +27,8 @@ public abstract class ItemControllerBase {
     }
 
     @PostMapping("/items")
-    public ResponseEntity<Void> saveItem(@RequestBody ItemDto itemDto) {
-        itemService.saveItem(itemDto);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<ItemDto> saveItem(@RequestBody InputtedItemDto itemDto) {
+        return ResponseEntity.ok(itemService.saveItem(itemDto));
     }
 
     @GetMapping("/items")

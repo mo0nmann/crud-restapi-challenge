@@ -1,6 +1,7 @@
 package com.dewc.crudrestapichallenge.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import com.dewc.crudrestapichallenge.dao.interfaces.IItemDao;
@@ -10,6 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
+@Qualifier("itemDao")
 public class ItemDao implements IItemDao {
 
     @Autowired
